@@ -11,4 +11,4 @@ var server = net.createServer(function(socket) {
 	socket.end(dateTime);
 });
 
-server.listen(process.eng.OPENSHIFT_NODEJS_PORT || 8080);
+server.listen(process.env.OPENSHIFT_NODEJS_PORT || 8080);
