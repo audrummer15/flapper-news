@@ -114,7 +114,13 @@ router.post('/register', function(req, res, next) {
 	user.setPassword(req.body.password);
 
 	user.save(function (err) {
-		if(err) { return next(err); }
+		if(err) { 
+			if (err['code'] == 11000) {
+				return res.status(409).json({message: 'That username is already taken.'});
+			} else {
+				return next(err); 
+			}
+		}
 
 		return res.json({token: user.generateJWT()})
 	});
